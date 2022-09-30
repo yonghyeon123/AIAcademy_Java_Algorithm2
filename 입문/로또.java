@@ -18,7 +18,7 @@ package 입문;
  */
 
 import java.util.*;
-public class 로또 {
+class 로또 {
     public static void main(String[] args) {
         로또 solution = new 로또();
         System.out.println(solution.solution());
@@ -26,104 +26,102 @@ public class 로또 {
 
     public String solution(){
         String title = " ### 로또 ### \n";
-        
-        buyLotto();
-        
+
+        int[] myLotto = buyLotto();
+
         String result = "";
-        System.out.println(" === 로또 추첨 ### ");
+        System.out.println(" === 로또 추첨 === ");
 
-        int[] arr = new int[6];
-
+        int[] originLotto = new int[6];
         Random random = new Random();
-        for(int i = 0; i < 6; i++){
+        for(int i =0; i< 6; i++ ){
             int number = random.nextInt(8) + 1;
-
-            boolean check = false; //false가 중복되지 않은 값
-            check = contains(arr, number, check);
-            if(!check)
-                arr[i] = number; //중복되지 않았으니 배열에 담기
-            else
-                i--; //중복됐으면 다시 돌아가 뽑기
+            boolean check = false; // false가 중복되지 않은 값
+            check = contains(originLotto, number, check);
+            if(check==false){
+                originLotto[i] = number; // 중복되지 않았으니 배열에 담아라.
+            }else{
+                i--; // 중복됐으면 이번 회수는 무효로 하고 다시 뽑아라.
+            }
+            
         }
 
-        //버블 정렬
-        arr = bubbleSort(arr);
-        
-        
-        String answer = printArray(arr);
-        
-        return title + answer;
+        // 버블정렬이 들어갈 부분
+        originLotto = bubbleSort(originLotto);
+        String answer = printArray(originLotto);
+        System.out.println();
+        result = findSame(originLotto, myLotto);
+        return title + answer + result;
     }
 
     /**
-     *배열 출력
-     */
-    public String printArray(int[] arr){
+     * 배열 출력 메서드
+    */
+    public String printArray(int[] arr){ 
         String result = "";
 
-        //출력을 위해 배열 내의 수를 result에 넣기
-        for(int i = 0; i < arr.length; i++){
-            result += arr[i] + "\t";
+        for(int i=0; i< arr.length; i++){
+            result += arr[i]+"\t";
         }
 
         String answer = String.format(
-        "**********************************************\n"
+        "*****************************************\n"
         +"로또 번호\n"
-        +"**********************************************\n"
-        +"%s\n"
-        +"**********************************************", 
-        result);
-
+        +"*****************************************\n"
+        +"%s"
+        +"\n*****************************************\n", result);
         return answer;
     }
-
+    
     /**
-     * 중복 체크
-     */
+     * 중복체크 메서드
+    */
     public boolean contains(int[] arr, int number, boolean check){
-        for(int j = 0; j < 6; j++){
-            if(arr[j] == number)
+        for(int j=0; j<6; j++){
+            if(arr[j] == number){
                 check = true;
+            }
         }
 
         return check;
-     }
-
-     /**
-      * 버블 정렬
-      */
+    }
+    /**
+     * 버블정렬
+    */
     public int[] bubbleSort(int[] arr){
-        for(int i = 0; i < arr.length; i++){
-            for(int j = 0; j < arr.length - 1; j++){
-                if(arr[j] > arr[j + 1]){
-                    //스왑이 일어나는 부분
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
+        for(int j =0; j < arr.length; j++){
+            for(int i=0; i< arr.length -1; i++){
+                if(arr[i] > arr[i+1]){
+                    int temp = arr[i];
+                    arr[i] = arr[i+1];
+                    arr[i+1] = temp;
                 }
             }
         }
 
         return arr;
-     }
+    }
 
-     /**
-      * 로또 구매
-      */
+    /**
+     * 로또 구매
+    */
+
     public int[] buyLotto(){
-        System.out.println(" === 로또 구매 === ");
-
         int[] myLotto = new int[6];
-        for(int i = 0; i < 6; i++){
-            System.out.println(" 원하는 숫자를 입력하시오(단 범위는 1부터 8까지입니다.) : ");
+        for(int i=0; i< 6; i++){
+            System.out.println(" 원하는 숫자를 입력하시오. 단 범위는 1부터 8까지입니다. ");
             Scanner scanner = new Scanner(System.in);
             int input = scanner.nextInt();
             myLotto[i] = input;
-            
         }
-        
-        String answer =  printArray(myLotto);
+
+        String answer = printArray(myLotto);
         System.out.println(answer);
         return null;
+    }
+
+    public String findSame(int[] originLotto, int[] myLotto){
+
+        return " ==> 축하합니다. 당첨되었습니다.";
     }
 }
