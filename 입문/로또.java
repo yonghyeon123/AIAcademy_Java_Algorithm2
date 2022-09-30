@@ -25,12 +25,19 @@ public class 로또 {
     }
 
     public String solution(){
-        String title = " ### 로또 생성기 ### \n";
+        String title = " ### 로또 ### \n";
+        System.out.println(" === 로또 구매 === ");
+        
+        BuyLotto();
+        
+        String result = "";
+        System.out.println(" === 로또 추첨 ### ");
+
         int[] arr = new int[6];
 
         Random random = new Random();
         for(int i = 0; i < 6; i++){
-            int number = random.nextInt(45) + 1;
+            int number = random.nextInt(8) + 1;
 
             boolean check = false; //false가 중복되지 않은 값
             check = contains(arr, number, check);
@@ -44,6 +51,7 @@ public class 로또 {
         bubbleSort(arr);
         
         String answer = printArray(arr);
+        
         return title + answer;
     }
 
@@ -95,5 +103,15 @@ public class 로또 {
                 }
             }
         }
+     }
+
+     /**
+      * 로또 구매 메서드
+      */
+     public void BuyLotto(){
+        System.out.println(" 원하는 숫자를 입력하시오(단 범위는 1부터 8까지입니다.) : ");
+        Scanner scanner = new Scanner(System.in);
+        int input = scanner.nextInt();
+        System.out.println(String.format("당신이 입력한 번호는 %d입니다.", input));
      }
 }
