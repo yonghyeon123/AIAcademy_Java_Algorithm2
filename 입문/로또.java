@@ -26,9 +26,8 @@ public class 로또 {
 
     public String solution(){
         String title = " ### 로또 ### \n";
-        System.out.println(" === 로또 구매 === ");
         
-        BuyLotto();
+        buyLotto();
         
         String result = "";
         System.out.println(" === 로또 추첨 ### ");
@@ -48,7 +47,8 @@ public class 로또 {
         }
 
         //버블 정렬
-        bubbleSort(arr);
+        arr = bubbleSort(arr);
+        
         
         String answer = printArray(arr);
         
@@ -56,7 +56,7 @@ public class 로또 {
     }
 
     /**
-     *배열 출력 메서드
+     *배열 출력
      */
     public String printArray(int[] arr){
         String result = "";
@@ -78,9 +78,9 @@ public class 로또 {
     }
 
     /**
-     * 중복 체크 메서드
+     * 중복 체크
      */
-     public boolean contains(int[] arr, int number, boolean check){
+    public boolean contains(int[] arr, int number, boolean check){
         for(int j = 0; j < 6; j++){
             if(arr[j] == number)
                 check = true;
@@ -90,9 +90,9 @@ public class 로또 {
      }
 
      /**
-      * 버블 정렬 메서드
+      * 버블 정렬
       */
-     public void bubbleSort(int[] arr){
+    public int[] bubbleSort(int[] arr){
         for(int i = 0; i < arr.length; i++){
             for(int j = 0; j < arr.length - 1; j++){
                 if(arr[j] > arr[j + 1]){
@@ -103,15 +103,27 @@ public class 로또 {
                 }
             }
         }
+
+        return arr;
      }
 
      /**
-      * 로또 구매 메서드
+      * 로또 구매
       */
-     public void BuyLotto(){
-        System.out.println(" 원하는 숫자를 입력하시오(단 범위는 1부터 8까지입니다.) : ");
-        Scanner scanner = new Scanner(System.in);
-        int input = scanner.nextInt();
-        System.out.println(String.format("당신이 입력한 번호는 %d입니다.", input));
-     }
+    public int[] buyLotto(){
+        System.out.println(" === 로또 구매 === ");
+
+        int[] myLotto = new int[6];
+        for(int i = 0; i < 6; i++){
+            System.out.println(" 원하는 숫자를 입력하시오(단 범위는 1부터 8까지입니다.) : ");
+            Scanner scanner = new Scanner(System.in);
+            int input = scanner.nextInt();
+            myLotto[i] = input;
+            
+        }
+        
+        String answer =  printArray(myLotto);
+        System.out.println(answer);
+        return null;
+    }
 }
