@@ -118,7 +118,7 @@ class 로또 {
 
         String answer = printArray(myLotto);
         System.out.println(answer);
-        return null;
+        return myLotto;
     }
 
     public int findSame(int[] originLotto, int[] myLotto){
@@ -140,8 +140,28 @@ class 로또 {
     * 3등 : 4개 맞춤
     * 4등 : 3개 맞춤
     * 이하는 꽝
+    * count는 일치한 숫자의 갯수
     */
-    public String rank(int count){
-        return "";
+    public String rank(int count){ 
+        String result = "";
+        switch(count){
+            case 6 :
+                result = "1등";
+                break;
+            case 5 :
+                result = "2등";
+                break;
+            case 4 :
+                result = "3등";
+                break;
+            case 3 : 
+                result = "4등";
+                break;
+            default:
+                result = "꽝";
+        }
+
+        String prefix = (!result.equals("꽝")) ? "축하함니다!!" : "다음 기회에...";
+        return prefix + result;
     }
 }
