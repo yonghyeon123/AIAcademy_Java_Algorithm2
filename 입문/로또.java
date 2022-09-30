@@ -50,7 +50,8 @@ class 로또 {
         originLotto = bubbleSort(originLotto);
         String answer = printArray(originLotto);
         System.out.println();
-        result = findSame(originLotto, myLotto);
+        int count = findSame(originLotto, myLotto);
+        result = rank(count);
         return title + answer + result;
     }
 
@@ -72,7 +73,7 @@ class 로또 {
         +"\n*****************************************\n", result);
         return answer;
     }
-    
+
     /**
      * 중복체크 메서드
     */
@@ -120,8 +121,27 @@ class 로또 {
         return null;
     }
 
-    public String findSame(int[] originLotto, int[] myLotto){
+    public int findSame(int[] originLotto, int[] myLotto){
+        int count = 0;
+        for(int i = 0; i < originLotto.length; i++){
+            for(int j = 0; j < myLotto.length; j++){
+                if(originLotto[i] == myLotto[j]){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
 
-        return " ==> 축하합니다. 당첨되었습니다.";
+    /**
+    * 로또 등수 정하기
+    * 1등 : 6개 다 맞춤
+    * 2등 : 5개 맞춤
+    * 3등 : 4개 맞춤
+    * 4등 : 3개 맞춤
+    * 이하는 꽝
+    */
+    public String rank(int count){
+        return "";
     }
 }
